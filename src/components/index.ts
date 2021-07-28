@@ -1,1 +1,2 @@
-export { default as DefaultInput } from 'components/DefaultInput';
+export { default as DefaultInput } from './DefaultInput';
+export { default as DefaultButton } from './Buttons';

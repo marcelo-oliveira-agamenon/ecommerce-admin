@@ -1,13 +1,10 @@
 import React from 'react';
+import { DefaultButton } from '../../components';
 
-import { DefaultInput } from 'components';
-
-const Login: React.FC = () => {
-  return (
-    <div>
-      <DefaultInput label="Email" />
-    </div>
-  );
-};
+const Login: React.FC = () => (
+  <>
+    <DefaultButton typeButton="primary">asdasd</DefaultButton>
+  </>
+);
 
 export default Login;

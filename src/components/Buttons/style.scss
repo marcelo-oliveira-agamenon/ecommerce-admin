@@ -1,0 +1,15 @@
+@import '../../global/variables';
+
+.default-button {
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border-radius: 6px;
+}
+
+.primary {
+  background: $secondary-color;
+  color: $third-color;
+  font-size: $font-medium;
+}
