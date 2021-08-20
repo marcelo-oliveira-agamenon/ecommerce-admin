@@ -1,0 +1,43 @@
+@import '../../global/variables';
+
+.default-table {
+  background: $third-color;
+  border-radius: 5px;
+  width: 900px;
+  border-spacing: 0;
+
+  thead {
+    .table-title {
+      letter-spacing: 0.6px;
+      padding: 8px 0 15px 0;
+      text-transform: capitalize;
+      font-size: $font-medium;
+      font-family: 'Montserrat Medium';
+    }
+
+    .table-header {
+      background-color: #efefef;
+
+      th {
+        color: #7c7c7c;
+        height: 30px;
+        text-transform: capitalize;
+        font-size: $font-minimal;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        height: 30px;
+        border-bottom: 0.01px solid #e5e5e5;
+        padding: 10px 0;
+        font-family: 'Montserrat Medium';
+        font-size: $font-minimal;
+        letter-spacing: 0.6px;
+        text-align: center;
+      }
+    }
+  }
+}

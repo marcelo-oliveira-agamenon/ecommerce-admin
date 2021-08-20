@@ -1,0 +1,19 @@
+@import '../../global/variables';
+
+#search-bar {
+  background-color: $third-color;
+  width: 320px;
+  border-radius: 10px;
+  height: 40px;
+  display: flex;
+  padding: 0 9px;
+  align-items: center;
+  gap: 18px;
+
+  input[type='text'] {
+    width: 100%;
+    height: 32px;
+    outline: none;
+    border: none;
+  }
+}

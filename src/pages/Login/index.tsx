@@ -1,10 +1,38 @@
-import React from 'react';
-import { DefaultButton } from '../../components';
+import React, { useState } from 'react';
 
-const Login: React.FC = () => (
-  <>
-    <DefaultButton typeButton="primary">asdasd</DefaultButton>
-  </>
-);
+import './style.scss';
+import { DefaultInput, DefaultButton } from '../../components';
+import LogoAdmin from '../../assets/images/logo.svg';
+
+const Login: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  return (
+    <div id="login">
+      <div>
+        <img src={LogoAdmin} alt="cash and grab" />
+      </div>
+
+      <div className="login-container">
+        <h1>Plataforma Grab and cash</h1>
+
+        <DefaultInput
+          label="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+
+        <DefaultInput
+          label="senha"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+
+        <DefaultButton typeButton="primary">entrar</DefaultButton>
+      </div>
+    </div>
+  );
+};
 
 export default Login;

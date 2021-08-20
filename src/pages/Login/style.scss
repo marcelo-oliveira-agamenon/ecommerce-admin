@@ -1,0 +1,22 @@
+@import '../../global/variables';
+
+#login {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 100%;
+
+  .login-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    border: 1px solid red;
+    background-color: $third-color;
+
+    h1:first-child {
+      text-transform: uppercase;
+      margin-top: 80px;
+    }
+  }
+}
