@@ -10,7 +10,7 @@ const Login: React.FC = () => {
 
   return (
     <div id="login">
-      <div>
+      <div className="logo-cash">
         <img src={LogoAdmin} alt="cash and grab" />
       </div>
 
