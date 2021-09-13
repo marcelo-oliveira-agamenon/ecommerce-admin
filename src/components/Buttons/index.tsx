@@ -7,7 +7,7 @@ interface IButton
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  typeButton: string;
+  typeButton: 'primary' | 'secondary';
 }
 
 const DefaultButton: React.FC<IButton> = ({ typeButton, ...rest }) => (

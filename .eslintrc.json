@@ -31,6 +31,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "comma-dangle": [2, "always-multiline"],
     "react/jsx-props-no-spreading": ["off"],
+    "class-methods-use-this": "off",
     "import/extensions": "off",
     "react/prop-types": "off"
   }
