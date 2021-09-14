@@ -10,6 +10,25 @@
   letter-spacing: 1px;
 }
 
+.loading {
+  margin: 0 auto;
+  border: 3px solid $third-color;
+  border-top: 3px solid $secondary-color;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .primary {
   background: $secondary-color;
   color: $third-color;

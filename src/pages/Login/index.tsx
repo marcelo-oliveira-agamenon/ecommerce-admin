@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import LoginService from '../../services/login';
 
 import './style.scss';
@@ -6,11 +7,23 @@ import { DefaultInput, DefaultButton } from '../../components';
 import LogoAdmin from '../../assets/images/logo.svg';
 
 const Login: React.FC = () => {
+  const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = () => {
-    LoginService.signUp(email, password);
+    setLoading(true);
+
+    setTimeout(() => {
+      LoginService.signUp(email, password)
+        .then(() => {
+          history.push('/dashboard');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, 3000);
   };
 
   return (
@@ -34,9 +47,14 @@ const Login: React.FC = () => {
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleLogin();
+            }
+          }}
         />
 
-        <DefaultButton typeButton="primary" onClick={handleLogin}>
+        <DefaultButton typeButton="primary" onClick={handleLogin} loading={loading}>
           entrar
         </DefaultButton>
       </div>
