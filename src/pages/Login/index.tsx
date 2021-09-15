@@ -15,15 +15,13 @@ const Login: React.FC = () => {
   const handleLogin = () => {
     setLoading(true);
 
-    setTimeout(() => {
-      LoginService.signUp(email, password)
-        .then(() => {
-          history.push('/dashboard');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 3000);
+    LoginService.signUp(email, password)
+      .then(() => {
+        history.push('/dashboard');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -54,7 +52,12 @@ const Login: React.FC = () => {
           }}
         />
 
-        <DefaultButton typeButton="primary" onClick={handleLogin} loading={loading}>
+        <DefaultButton
+          typeButton="primary"
+          onClick={handleLogin}
+          loading={loading}
+          disabled={loading}
+        >
           entrar
         </DefaultButton>
       </div>
