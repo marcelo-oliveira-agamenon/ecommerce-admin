@@ -1,0 +1,21 @@
+@import '../../global/variables';
+
+#loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    color: $third-color;
+    animation: spin 2s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

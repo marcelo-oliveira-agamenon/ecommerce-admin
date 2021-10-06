@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from '../pages/Login/index';
-import Dashboard from '../pages/Dashboard/index';
+import AuthRoutes from './authenticatedRoutes';
 
 const routes: React.FC = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={Login} />
-      <Route path="/dashboard" exact component={Dashboard} />
+      <AuthRoutes />
     </Switch>
   </BrowserRouter>
 );
