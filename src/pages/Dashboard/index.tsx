@@ -13,11 +13,11 @@ const Dashboard: React.FC = () => {
         <Loading size="bg" />
       ) : (
         <div className="grid">
-          <div className="tile">
+          <div className="tile" style={{ animation: 'popUp 1.5s 0.1s forwards' }}>
             <h1>Pedidos por mês</h1>
           </div>
 
-          <div className="tile">
+          <div className="tile" style={{ animation: 'popUp 1.5s 0.6s forwards' }}>
             <div className="grid-list">
               <h1>quantidade produtos</h1>
 
@@ -37,11 +37,11 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="tile">
+          <div className="tile" style={{ animation: 'popUp 1.5s 1.5s forwards' }}>
             <h1>Lucro mensal</h1>
           </div>
 
-          <div className="tile">
+          <div className="tile" style={{ animation: 'popUp 1.5s 2s forwards' }}>
             <h1>categorias por produtos</h1>
           </div>
         </div>

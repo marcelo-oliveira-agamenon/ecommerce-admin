@@ -1,6 +1,7 @@
 @import '../../global/variables';
 
 #header-container {
+  z-index: 1;
   width: 100vw;
   height: 40px;
   background: $third-color;

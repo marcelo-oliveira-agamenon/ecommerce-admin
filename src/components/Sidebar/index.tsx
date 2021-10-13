@@ -6,6 +6,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineBank,
   AiOutlineLogout,
+  AiOutlineHome,
 } from 'react-icons/ai';
 import { BiUser } from 'react-icons/bi';
 import Logo from '../../assets/images/logo.svg';
@@ -31,6 +32,12 @@ const Sidebar: React.FC<ISidemenu> = ({ isOpen, close }) => {
 
           <div id="sidebar">
             <img src={Logo} alt="grab and cash" className="logo" />
+
+            <div className="icon-link">
+              <AiOutlineHome size={28} />
+
+              <Link to="/dashboard">Home</Link>
+            </div>
 
             <div className="icon-link">
               <AiFillTag size={28} />

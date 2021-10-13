@@ -2,9 +2,9 @@
 
 #background-shadow {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: rgba($color: $fourth-color, $alpha: 0.4);
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   right: 0;
 }
@@ -28,7 +28,7 @@
 
   div:last-child {
     margin: auto 0 0 0;
-    margin-bottom: 37px;
+    margin-bottom: 42px;
   }
 
   .icon-link {
@@ -53,17 +53,6 @@
       transform: translateX(18px);
       padding: 1px 2px 1px 8px;
       transition: all 0.5s ease-in;
-
-      a,
-      span {
-        color: $third-color;
-        transition: all 1.3s;
-      }
-
-      path {
-        color: $third-color;
-        transition: all 1.3s;
-      }
     }
   }
 }
