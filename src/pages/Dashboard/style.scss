@@ -34,6 +34,11 @@
     border-radius: 5px;
     opacity: 0;
 
+    .recharts-wrapper {
+      margin-top: 50px;
+      margin-left: -50px;
+    }
+
     .grid-list {
       @extend .grid;
       width: 100%;
