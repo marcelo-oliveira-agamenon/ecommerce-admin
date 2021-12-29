@@ -6,6 +6,7 @@ import { User } from '../../models/user';
 import './style.scss';
 
 const Header: React.FC = () => {
+  const whiteSpace = ' ';
   const user: User = JSON.parse(localStorage.getItem('grab-and-cash-user') as string);
   const [sidemenuOpen, setSidemenuOpen] = useState<boolean>(false);
 
@@ -18,7 +19,7 @@ const Header: React.FC = () => {
 
         <h1>
           Olá,
-          {user ? user.Name : 'Usuário!'}
+          {user ? whiteSpace.concat(user.Name) : 'Usuário!'}
         </h1>
       </div>
     </>

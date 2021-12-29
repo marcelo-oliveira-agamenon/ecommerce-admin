@@ -20,6 +20,16 @@ class LoginService {
         }
       });
   }
+
+  async refreshToken(): Promise<void> {
+    await apiService.patch('/v1/refresh').then(({ data }) => {
+      const dataResponse: UserFromAPIResponse = data;
+
+      if (dataResponse.token) {
+        localStorage.setItem('grab-and-cash-token', dataResponse.token);
+      }
+    });
+  }
 }
 
 export default new LoginService();

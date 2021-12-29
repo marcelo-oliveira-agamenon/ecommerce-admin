@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   AiFillTag,
   AiOutlineOrderedList,
@@ -19,9 +19,16 @@ interface ISidemenu {
 }
 
 const Sidebar: React.FC<ISidemenu> = ({ isOpen, close }) => {
+  const history = useHistory();
+
   const handleLogout = useCallback(() => {
     localStorage.clear();
     window.location.href = '/';
+  }, []);
+
+  const handleChangeRoute = useCallback((route: string) => {
+    history.push(route);
+    close();
   }, []);
 
   return (
@@ -33,13 +40,21 @@ const Sidebar: React.FC<ISidemenu> = ({ isOpen, close }) => {
           <div id="sidebar">
             <img src={Logo} alt="grab and cash" className="logo" />
 
-            <div className="icon-link">
+            <div
+              aria-hidden="true"
+              className="icon-link"
+              onClick={() => handleChangeRoute('dashboard')}
+            >
               <AiOutlineHome size={28} />
 
               <Link to="/dashboard">Home</Link>
             </div>
 
-            <div className="icon-link">
+            <div
+              aria-hidden="true"
+              className="icon-link"
+              onClick={() => handleChangeRoute('products')}
+            >
               <AiFillTag size={28} />
 
               <Link to="/products">Produtos</Link>

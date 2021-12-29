@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://ecommerce-go.herokuapp.com',
+  baseURL: 'http://localhost:4000',
 });
 
 api.interceptors.request.use(async (config) => {
@@ -13,5 +13,17 @@ api.interceptors.request.use(async (config) => {
 
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.clear();
+      window.location.href = '/';
+    }
+
+    return error;
+  },
+);
 
 export default api;

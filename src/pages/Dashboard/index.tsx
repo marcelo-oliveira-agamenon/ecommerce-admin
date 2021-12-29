@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { BarChart, XAxis, YAxis } from 'recharts';
+// eslint-disable-next-line
+import { BarChart, PieChart, Pie, XAxis, YAxis } from 'recharts';
 import { Loading } from '../../components';
 import DashboardService from '../../services/dashboard';
 import {
@@ -18,40 +19,20 @@ const Dashboard: React.FC = () => {
   const [infoCard3, setInfoCard3] = useState<DashboardCard3>();
   const [infoCard4, setInfoCard4] = useState<DashboardCard4>();
 
-  const getDashboardInformationCard1 = useCallback(async () => {
-    await DashboardService.getOrdersByMonth()
-      .then((response) => {
-        setInfoCard1(response);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const getDashboardInformations = useCallback(async () => {
+    setLoading(true);
 
-  const getDashboardInformationCard2 = useCallback(async () => {
-    await DashboardService.getProfitByMonth()
+    Promise.all([
+      DashboardService.getOrdersByMonth(),
+      DashboardService.getProfitByMonth(),
+      DashboardService.getInfoQuantity(),
+      DashboardService.getCategories(),
+    ])
       .then((response) => {
-        setInfoCard2(response);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  const getDashboardInformationCard3 = useCallback(async () => {
-    await DashboardService.getInfoQuantity()
-      .then((response) => {
-        setInfoCard3(response);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  const getDashboardInformationCard4 = useCallback(async () => {
-    await DashboardService.getCategories()
-      .then((response) => {
-        setInfoCard4(response);
+        setInfoCard1(response[0].reverse());
+        setInfoCard2(response[1].reverse());
+        setInfoCard3(response[2]);
+        setInfoCard4(response[3]);
       })
       .finally(() => {
         setLoading(false);
@@ -59,10 +40,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    getDashboardInformationCard1();
-    getDashboardInformationCard2();
-    getDashboardInformationCard3();
-    getDashboardInformationCard4();
+    getDashboardInformations();
   }, []);
 
   return (
@@ -79,7 +57,7 @@ const Dashboard: React.FC = () => {
               <YAxis dataKey="Quantity" />
             </BarChart>
           </div>
-          {console.log(infoCard3, infoCard4)}
+
           <div className="tile" style={{ animation: 'popUp 1.5s 0.6s forwards' }}>
             <div className="grid-list">
               <h1>quantidade produtos</h1>
@@ -111,6 +89,19 @@ const Dashboard: React.FC = () => {
 
           <div className="tile" style={{ animation: 'popUp 1.5s 2s forwards' }}>
             <h1>categorias por produtos</h1>
+
+            <PieChart width={300} height={300} className="circle-graph">
+              <Pie
+                data={infoCard4?.data}
+                dataKey="Count"
+                nameKey="Name"
+                outerRadius={135}
+                cx="50%"
+                cy="50%"
+                fill="green"
+                label
+              />
+            </PieChart>
           </div>
         </div>
       )}

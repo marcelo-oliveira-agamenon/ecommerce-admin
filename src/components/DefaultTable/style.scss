@@ -1,9 +1,9 @@
 @import '../../global/variables';
 
-.default-table {
+#default-table {
   background: $third-color;
   border-radius: 5px;
-  width: 900px;
+  width: 100%;
   border-spacing: 0;
 
   thead {
