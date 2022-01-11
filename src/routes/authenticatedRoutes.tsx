@@ -10,7 +10,7 @@ const AuthenticatedRoutes: React.FC = () => {
   useEffect(() => {
     setInterval(async () => {
       await LoginService.refreshToken();
-    }, 3000);
+    }, 3e6);
   }, []);
 
   return (

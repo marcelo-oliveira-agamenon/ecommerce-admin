@@ -4,10 +4,18 @@ import { UserFromAPIResponse } from '../models/user';
 class LoginService {
   async signUp(email: string, password: string): Promise<void> {
     await apiService
-      .post('/v1/admin/login', {
-        email,
-        password,
-      })
+      .post(
+        '/v1/login',
+        {
+          email,
+          password,
+        },
+        {
+          params: {
+            admin: 'true',
+          },
+        },
+      )
       .then(({ data }) => {
         const dataResponse: UserFromAPIResponse = data;
 
@@ -23,7 +31,7 @@ class LoginService {
 
   async refreshToken(): Promise<void> {
     await apiService.patch('/v1/refresh').then(({ data }) => {
-      const dataResponse: UserFromAPIResponse = data;
+      const dataResponse: Partial<UserFromAPIResponse> = data;
 
       if (dataResponse.token) {
         localStorage.setItem('grab-and-cash-token', dataResponse.token);

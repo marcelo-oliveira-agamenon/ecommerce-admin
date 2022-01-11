@@ -23,6 +23,7 @@
   "rules": {
     "no-unused-vars": "warn",
     "no-inline-comments": "warn",
+    "object-curly-newline": "off",
     "no-console": "warn",
     "linebreak-style": ["error", "windows"],
     "no-use-before-define": "off",

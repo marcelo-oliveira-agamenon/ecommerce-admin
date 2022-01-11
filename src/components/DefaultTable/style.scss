@@ -5,11 +5,14 @@
   border-radius: 5px;
   width: 100%;
   border-spacing: 0;
+  box-shadow: 2px 3px 2px rgba($color: #7c7c7c, $alpha: 0.2);
 
   thead {
     .table-title {
+      width: 100%;
+      text-align: center;
       letter-spacing: 0.6px;
-      padding: 8px 0 15px 0;
+      padding: 10px 0 12px 0;
       text-transform: capitalize;
       font-size: $font-medium;
       font-family: 'Montserrat Medium';
@@ -37,6 +40,10 @@
         font-size: $font-minimal;
         letter-spacing: 0.6px;
         text-align: center;
+      }
+
+      svg {
+        cursor: pointer;
       }
     }
   }
