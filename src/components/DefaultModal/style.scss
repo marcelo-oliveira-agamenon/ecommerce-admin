@@ -14,4 +14,24 @@
   z-index: 5;
   background-color: $third-color;
   align-self: center;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .modal-title {
+    text-transform: uppercase;
+    font-size: $font-small;
+  }
+
+  .modal-text {
+    font-size: $font-medium;
+    text-align: center;
+  }
+
+  .btns-container {
+    display: flex;
+    gap: 10px;
+  }
 }

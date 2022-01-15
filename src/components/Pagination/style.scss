@@ -1,0 +1,21 @@
+@import '../../global/variables';
+
+#pagination {
+  display: flex;
+  align-items: center;
+
+  .pagination-pages {
+    outline: none;
+    border: none;
+    background-color: white;
+    margin: 0 3px;
+    padding: 5px;
+    font-size: $font-medium;
+    cursor: pointer;
+  }
+
+  svg {
+    color: $third-color;
+    cursor: pointer;
+  }
+}

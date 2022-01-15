@@ -24,3 +24,12 @@ export interface Product {
   };
   ProductImage: Array<string>;
 }
+
+export interface GetAllProductsFilters {
+  limit?: number;
+  offset?: number;
+  category?: string;
+  promotion?: boolean;
+  recent?: boolean;
+  name?: string;
+}

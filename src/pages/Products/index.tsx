@@ -1,7 +1,13 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProductService from '../../services/products';
-import { DefaultButton, DefaultSearchBar, DefaultTable, DefaultModal } from '../../components';
+import {
+  DefaultButton,
+  DefaultSearchBar,
+  DefaultTable,
+  DefaultModal,
+  Pagination,
+} from '../../components';
 import { Product } from '../../models/product';
 
 import './style.scss';
@@ -12,16 +18,25 @@ const Products: React.FC = () => {
   const [selectedProductID, setSelectedProductID] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleGetProducts = useCallback(async () => {
-    setProducts(await ProductService.getAllProducts());
+  const handleGetProducts = useCallback(async (limit?: number, offset?: number) => {
+    setProducts(
+      await ProductService.getAllProducts({
+        limit,
+        offset,
+      }),
+    );
   }, []);
 
   useEffect(() => {
     handleGetProducts();
   }, []);
 
-  const handleSearch = useCallback((query: string) => {
-    console.log('aaa', query);
+  const handleSearch = useCallback(async (query: string) => {
+    setProducts(
+      await ProductService.getAllProducts({
+        name: query,
+      }),
+    );
   }, []);
 
   const handleCreateProducts = () => {
@@ -41,6 +56,10 @@ const Products: React.FC = () => {
     await ProductService.deleteProduct(selectedProductID);
   }, [selectedProductID]);
 
+  const cancelActionOnModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       {showModal && (
@@ -49,7 +68,7 @@ const Products: React.FC = () => {
           size="sm"
           overallText="Deseja deletar este produto?"
           onConfirmAction={handleDeleteProduct}
-          onCancelAction={() => setShowModal(false)}
+          onCancelAction={cancelActionOnModal}
           confirmBtnText="Deletar"
           cancelBtnText="cancelar"
         />
@@ -61,7 +80,11 @@ const Products: React.FC = () => {
             cadastrar
           </DefaultButton>
 
-          <DefaultSearchBar placeholder="Buscar" onSearch={handleSearch} />
+          <DefaultSearchBar
+            placeholder="Buscar"
+            onSearch={handleSearch}
+            onClose={handleGetProducts}
+          />
         </div>
 
         <div className="body">
@@ -79,6 +102,8 @@ const Products: React.FC = () => {
             onEditRow={handleEditProducts}
             keyIdentifierAction="ID"
           />
+
+          <Pagination quantityOfElements={30} changePage={handleGetProducts} />
         </div>
       </div>
     </>

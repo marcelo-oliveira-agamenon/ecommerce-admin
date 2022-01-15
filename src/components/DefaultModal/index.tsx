@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import DefaultButton from '../Buttons';
 import './style.scss';
 
 interface IModal {
@@ -42,21 +43,21 @@ const Modal: React.FC<IModal> = ({
       tabIndex={0}
     >
       <div id="modal-global" style={{ width: returnSizeModal(), height: returnSizeModal() }}>
-        <h1>{titleText}</h1>
+        <h1 className="modal-title">{titleText}</h1>
 
-        <p>{overallText}</p>
+        <p className="modal-text">{overallText}</p>
 
         <div className="btns-container">
           {confirmBtnText && (
-            <button type="button" onClick={onConfirmAction}>
+            <DefaultButton typeButton="secondary" onClick={onConfirmAction}>
               {confirmBtnText}
-            </button>
+            </DefaultButton>
           )}
 
           {cancelBtnText && (
-            <button type="button" onClick={onCancelAction}>
+            <DefaultButton typeButton="primary" onClick={onCancelAction}>
               {cancelBtnText}
-            </button>
+            </DefaultButton>
           )}
         </div>
       </div>
