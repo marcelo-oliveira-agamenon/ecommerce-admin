@@ -7,11 +7,16 @@
   .pagination-pages {
     outline: none;
     border: none;
-    background-color: white;
+    background-color: $third-color;
     margin: 0 3px;
     padding: 5px;
     font-size: $font-medium;
     cursor: pointer;
+  }
+
+  .active {
+    background-color: $secondary-color;
+    color: $third-color;
   }
 
   svg {

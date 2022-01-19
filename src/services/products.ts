@@ -1,8 +1,8 @@
 import apiService from '../config/axiosConfig';
-import { Product, GetAllProductsFilters } from '../models/product';
+import { Product, GetAllProductsFilters, GetAllProductsResponse } from '../models/product';
 
 class ProductService {
-  async getAllProducts(params?: GetAllProductsFilters): Promise<Product[]> {
+  async getAllProducts(params?: GetAllProductsFilters): Promise<GetAllProductsResponse> {
     const allProducts = (
       await apiService.get('/v1/product', {
         params,

@@ -25,6 +25,11 @@ export interface Product {
   ProductImage: Array<string>;
 }
 
+export interface GetAllProductsResponse {
+  count: number;
+  products: Product[];
+}
+
 export interface GetAllProductsFilters {
   limit?: number;
   offset?: number;

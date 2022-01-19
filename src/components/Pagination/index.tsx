@@ -31,7 +31,7 @@ const Pagination: React.FC<IPagination> = ({ quantityOfElements, changePage }) =
           <button
             key={`key-${Math.random()}`}
             type="button"
-            className="pagination-pages"
+            className={`pagination-pages ${page - 1 === index ? 'active' : ''}`}
             onClick={() => handleChangePage(index + 1)}
           >
             {index + 1}

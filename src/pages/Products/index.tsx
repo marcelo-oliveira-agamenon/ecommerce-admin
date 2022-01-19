@@ -8,35 +8,28 @@ import {
   DefaultModal,
   Pagination,
 } from '../../components';
-import { Product } from '../../models/product';
+import { GetAllProductsResponse } from '../../models/product';
 
 import './style.scss';
 
 const Products: React.FC = () => {
   const history = useHistory();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<GetAllProductsResponse>();
   const [selectedProductID, setSelectedProductID] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleGetProducts = useCallback(async (limit?: number, offset?: number) => {
+  const handleGetProducts = useCallback(async (limit?: number, offset?: number, query?: string) => {
     setProducts(
       await ProductService.getAllProducts({
         limit,
         offset,
+        name: query,
       }),
     );
   }, []);
 
   useEffect(() => {
-    handleGetProducts();
-  }, []);
-
-  const handleSearch = useCallback(async (query: string) => {
-    setProducts(
-      await ProductService.getAllProducts({
-        name: query,
-      }),
-    );
+    handleGetProducts(5, 0);
   }, []);
 
   const handleCreateProducts = () => {
@@ -82,28 +75,32 @@ const Products: React.FC = () => {
 
           <DefaultSearchBar
             placeholder="Buscar"
-            onSearch={handleSearch}
+            onSearch={(query) => handleGetProducts(undefined, undefined, query)}
             onClose={handleGetProducts}
           />
         </div>
 
         <div className="body">
-          <DefaultTable
-            data={products}
-            headers={[
-              { headerKey: 'Name', headerTitle: 'Nome' },
-              { headerKey: 'Value', headerTitle: 'Valor (R$)' },
-              { headerKey: 'Description', headerTitle: 'Descrição' },
-              { headerKey: 'StockQtd', headerTitle: 'Quantidade em Estoque' },
-            ]}
-            titleTable="Produtos"
-            emptyTableMessage="Sem produtos cadastrados"
-            onDeleteRow={showDeleteModal}
-            onEditRow={handleEditProducts}
-            keyIdentifierAction="ID"
-          />
+          {products?.products && (
+            <>
+              <DefaultTable
+                data={products.products}
+                headers={[
+                  { headerKey: 'Name', headerTitle: 'Nome' },
+                  { headerKey: 'Value', headerTitle: 'Valor (R$)' },
+                  { headerKey: 'Description', headerTitle: 'Descrição' },
+                  { headerKey: 'StockQtd', headerTitle: 'Quantidade em Estoque' },
+                ]}
+                titleTable="Produtos"
+                emptyTableMessage="Sem produtos cadastrados"
+                onDeleteRow={showDeleteModal}
+                onEditRow={handleEditProducts}
+                keyIdentifierAction="ID"
+              />
 
-          <Pagination quantityOfElements={30} changePage={handleGetProducts} />
+              <Pagination quantityOfElements={products?.count} changePage={handleGetProducts} />
+            </>
+          )}
         </div>
       </div>
     </>
