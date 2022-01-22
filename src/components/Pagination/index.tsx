@@ -23,7 +23,7 @@ const Pagination: React.FC<IPagination> = ({ quantityOfElements, changePage }) =
 
   return (
     <div id="pagination">
-      {page > 1 && <RiArrowDropLeftFill size={30} />}
+      {page > 1 && <RiArrowDropLeftFill size={30} onClick={() => handleChangePage(page - 1)} />}
 
       {Array(numberOfPages)
         .fill('')
@@ -38,7 +38,9 @@ const Pagination: React.FC<IPagination> = ({ quantityOfElements, changePage }) =
           </button>
         ))}
 
-      <RiArrowDropRightFill size={30} />
+      {page < numberOfPages && (
+        <RiArrowDropRightFill size={30} onClick={() => handleChangePage(page + 1)} />
+      )}
     </div>
   );
 };

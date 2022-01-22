@@ -12,11 +12,20 @@
     padding: 5px;
     font-size: $font-medium;
     cursor: pointer;
+
+    &:hover {
+      transition: all 1s ease;
+      background-color: rgba($color: $third-color, $alpha: 0.8);
+    }
   }
 
   .active {
     background-color: $secondary-color;
     color: $third-color;
+
+    &:hover {
+      background-color: rgba($color: $secondary-color, $alpha: 0.8);
+    }
   }
 
   svg {

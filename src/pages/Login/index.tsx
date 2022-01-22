@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginService from '../../services/login';
 
@@ -23,6 +23,14 @@ const Login: React.FC = () => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('grab-and-cash-token') as string;
+
+    if (token) {
+      history.push('/dashboard');
+    }
+  }, []);
 
   return (
     <div id="login">

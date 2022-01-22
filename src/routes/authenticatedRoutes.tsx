@@ -3,8 +3,9 @@ import { Route } from 'react-router-dom';
 import { Header } from '../components';
 import LoginService from '../services/login';
 
-import Dashboard from '../pages/Dashboard/index';
-import Products from '../pages/Products/index';
+import Dashboard from '../pages/Dashboard';
+import Products from '../pages/Products';
+import InsertProduct from '../pages/InsertProduct';
 
 const AuthenticatedRoutes: React.FC = () => {
   useEffect(() => {
@@ -18,7 +19,9 @@ const AuthenticatedRoutes: React.FC = () => {
       <Header />
 
       <Route path="/dashboard" exact component={Dashboard} />
+
       <Route path="/products" exact component={Products} />
+      <Route path="/products/create" exact component={InsertProduct} />
     </>
   );
 };

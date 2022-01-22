@@ -98,7 +98,9 @@ const Products: React.FC = () => {
                 keyIdentifierAction="ID"
               />
 
-              <Pagination quantityOfElements={products?.count} changePage={handleGetProducts} />
+              <div className="pagination-products">
+                <Pagination quantityOfElements={products?.count} changePage={handleGetProducts} />
+              </div>
             </>
           )}
         </div>
