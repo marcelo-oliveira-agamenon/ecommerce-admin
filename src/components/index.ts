@@ -7,3 +7,6 @@ export { default as Sidebar } from './Sidebar';
 export { default as Loading } from './Loading';
 export { default as DefaultModal } from './DefaultModal';
 export { default as Pagination } from './Pagination';
+export { default as DefaultTextArea } from './DefaultTextArea';
+export { default as DefaultSelect } from './DefaultSelect';
+export { default as UploadImage } from './UploadImage';

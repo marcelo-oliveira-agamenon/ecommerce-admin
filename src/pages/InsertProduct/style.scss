@@ -1,1 +1,16 @@
 @import '../../global/variables';
+
+#create_product {
+  padding: 70px 60px;
+
+  .product_form {
+    display: grid;
+    row-gap: 25px;
+
+    .grid_element {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 50px;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../global/variables';
+
+#upload_image_element {
+  border: 1px solid red;
+  height: 80px;
+  background-color: white;
+  cursor: pointer;
+
+  .input_image_container {
+    visibility: hidden;
+  }
+}

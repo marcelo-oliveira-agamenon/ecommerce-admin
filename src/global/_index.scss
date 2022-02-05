@@ -22,3 +22,13 @@ body {
   font-size: 14px;
   -webkit-font-smoothing: antialiased !important;
 }
+
+#global_loading_page {
+  position: absolute;
+  background-color: rgba($color: $primary-color, $alpha: 0.5);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}

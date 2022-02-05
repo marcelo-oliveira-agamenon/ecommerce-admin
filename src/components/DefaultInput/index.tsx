@@ -38,7 +38,7 @@ const DefaultInput: React.FC<IDefaultInput> = ({ label, errorText, ...rest }) =>
 
       <input {...rest} type={typeInput} />
 
-      {errorText && <span className="errorText">{errorText}</span>}
+      {errorText && <span className="error-text">{errorText}</span>}
     </div>
   );
 };

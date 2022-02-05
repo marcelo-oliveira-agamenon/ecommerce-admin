@@ -38,3 +38,19 @@ export interface GetAllProductsFilters {
   recent?: boolean;
   name?: string;
 }
+
+export interface CreateOrUpdateProduct {
+  Name: string;
+  Categoryid: number;
+  Value: number;
+  StockQtd: number;
+  Description: string;
+  TypeUnit: string;
+  TecnicalDetails: string;
+  HasPromotion: boolean;
+  Discount: number;
+  HasShipping: boolean;
+  ShippingPrice: number;
+  Rate: number;
+  ProductImage: Array<string>;
+}
