@@ -1,12 +1,55 @@
 @import '../../global/variables';
 
 #upload_image_element {
-  border: 1px solid red;
-  height: 80px;
-  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  border: 3px dashed $third-color;
+  border-radius: 6px;
   cursor: pointer;
+
+  .images_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 100%;
+    padding: 15px;
+
+    .image {
+      position: relative;
+
+      img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        cursor: auto;
+      }
+
+      button {
+        position: absolute;
+        border: none;
+        right: -3px;
+        top: -7px;
+        border-radius: 50%;
+        background-color: $error-color;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        color: $third-color;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .upload_title {
+    font-size: $font-large;
+    color: $third-color;
+    text-align: center;
+  }
 
   .input_image_container {
     visibility: hidden;
+    position: absolute;
   }
 }

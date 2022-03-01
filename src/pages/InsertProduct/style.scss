@@ -12,5 +12,10 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 50px;
     }
+
+    .button_container {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }

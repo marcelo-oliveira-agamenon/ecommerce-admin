@@ -52,5 +52,5 @@ export interface CreateOrUpdateProduct {
   HasShipping: boolean;
   ShippingPrice: number;
   Rate: number;
-  ProductImage: Array<string>;
+  ProductImage: Array<File>;
 }

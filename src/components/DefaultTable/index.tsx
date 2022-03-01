@@ -55,7 +55,7 @@ const DefaultTable: React.FC<IDefaultTable> = ({
                   key={returnKeyString(index1)}
                   style={{ borderBottom: index + 1 === data.length ? 'none' : '' }}
                 >
-                  {obj[key.headerKey]}
+                  <span>{obj[key.headerKey]}</span>
                 </td>
               ))}
 

@@ -5,12 +5,14 @@ import {
   DefaultSelect,
   UploadImage,
   DefaultButton,
+  DefaultModal,
 } from '../../components';
 import { CreateOrUpdateProduct } from '../../models/product';
 import CategoryServices from '../../services/category';
 import './style.scss';
 
 const InsertProduct: React.FC = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [product, setProduct] = useState<CreateOrUpdateProduct>({
     Name: '',
     Categoryid: 0,
@@ -50,7 +52,7 @@ const InsertProduct: React.FC = () => {
     getAllCategoriesForSelect();
   }, []);
 
-  const handleInputsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputsChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const propName = event.target.name;
     setProduct({ ...product, [propName]: event.target.value });
   };
@@ -60,80 +62,98 @@ const InsertProduct: React.FC = () => {
   }, []);
 
   return (
-    <div id="create_product">
-      <form className="product_form" onSubmit={handleSubmitProduct}>
-        <DefaultInput
-          type="text"
-          name="Name"
-          label="Nome"
-          value={product.Name}
-          onChange={handleInputsChange}
-          required
+    <>
+      {showModal && (
+        <DefaultModal
+          titleText="Sucesso"
+          size="sm"
+          overallText="Produto cadastrado com sucesso"
+          onConfirmAction={() => setShowModal(false)}
+          // onCancelAction={cancelActionOnModal}
+          confirmBtnText="Ok"
+          // cancelBtnText="cancelar"
         />
+      )}
 
-        <DefaultInput
-          name="Value"
-          type="number"
-          label="Valor (R$)"
-          value={product.Value !== 0 ? product.Value : undefined}
-          onChange={handleInputsChange}
-          required
-        />
-
-        <div className="grid_element">
+      <div id="create_product">
+        <form className="product_form" onSubmit={handleSubmitProduct}>
           <DefaultInput
             type="text"
-            name="TypeUnit"
-            label="Tipo da Unidade no Estoque"
-            value={product.TypeUnit}
+            name="Name"
+            label="Nome"
+            value={product.Name}
             onChange={handleInputsChange}
             required
           />
 
           <DefaultInput
-            name="StockQtd"
+            name="Value"
             type="number"
-            label="Quantidade em Estoque"
-            value={product.StockQtd !== 0 ? product.StockQtd : undefined}
+            label="Valor (R$)"
+            value={product.Value !== 0 ? product.Value : undefined}
             onChange={handleInputsChange}
             required
           />
-        </div>
 
-        <DefaultTextArea
-          label="Descrição do Produto"
-          name="Description"
-          rows={10}
-          value={product.Description}
-          onChange={(event) => setProduct({ ...product, Description: event.target.value })}
-          required
-        />
+          <div className="grid_element">
+            <DefaultInput
+              type="text"
+              name="TypeUnit"
+              label="Tipo da Unidade no Estoque"
+              value={product.TypeUnit}
+              onChange={handleInputsChange}
+              required
+            />
 
-        <DefaultTextArea
-          label="Detalhes Técnicos"
-          name="TecnicalDetails"
-          rows={10}
-          value={product.TecnicalDetails}
-          onChange={(event) => setProduct({ ...product, TecnicalDetails: event.target.value })}
-          required
-        />
+            <DefaultInput
+              name="StockQtd"
+              type="number"
+              label="Quantidade em Estoque"
+              value={product.StockQtd !== 0 ? product.StockQtd : undefined}
+              onChange={handleInputsChange}
+              required
+            />
+          </div>
 
-        <DefaultSelect
-          options={categoriesForSelect}
-          label="Categoria"
-          placeholder="Selecione uma categoria"
-          value={product.Categoryid !== 0 ? product.Categoryid : undefined}
-          onChange={(event) => setProduct({ ...product, Categoryid: Number(event.target.value) })}
-          required
-        />
+          <DefaultTextArea
+            label="Descrição do Produto"
+            name="Description"
+            rows={10}
+            value={product.Description}
+            onChange={handleInputsChange}
+            required
+          />
 
-        <UploadImage onUploadImage={() => {}} />
+          <DefaultTextArea
+            label="Detalhes Técnicos"
+            name="TecnicalDetails"
+            rows={10}
+            value={product.TecnicalDetails}
+            onChange={handleInputsChange}
+            required
+          />
 
-        <DefaultButton typeButton="primary" type="submit">
-          confirmar
-        </DefaultButton>
-      </form>
-    </div>
+          <DefaultSelect
+            options={categoriesForSelect}
+            label="Categoria"
+            placeholder="Selecione uma categoria"
+            value={product.Categoryid !== 0 ? product.Categoryid : undefined}
+            onChange={(event) => setProduct({ ...product, Categoryid: Number(event.target.value) })}
+            required
+          />
+
+          <UploadImage
+            onUploadImage={(images) => setProduct({ ...product, ProductImage: images })}
+          />
+
+          <div className="button_container">
+            <DefaultButton typeButton="primary" type="submit">
+              confirmar
+            </DefaultButton>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

@@ -2,17 +2,35 @@ import React, { useState, useRef, useCallback } from 'react';
 import './style.scss';
 
 interface IUploadImage {
-  onUploadImage: (image: File) => void;
+  onUploadImage: (images: File[]) => void;
 }
 
 const UploadImage: React.FC<IUploadImage> = ({ onUploadImage }) => {
-  const [imagePath, setImagePath] = useState<string>('');
-  const inputRef: any = useRef(null);
+  const [images, setImages] = useState<
+    Array<{
+      file: File;
+      path: string;
+    }>
+  >([]);
+  const inputRef: React.LegacyRef<HTMLInputElement> | undefined = useRef(null);
 
-  const handleImageChange = (e: any) => {
-    console.log(e);
-    setImagePath(e.target.value);
-    onUploadImage(e.target.value);
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+
+    if (files?.length) {
+      const auxArray = [];
+      for (let i = 0; i < files.length; i += 1) {
+        const fileObj = {
+          file: files[i],
+          path: URL.createObjectURL(files[i]),
+        };
+
+        auxArray.push(fileObj);
+      }
+
+      setImages(auxArray);
+      onUploadImage(auxArray.map((file) => file.file));
+    }
   };
 
   const handleClickOnUpload = useCallback(() => {
@@ -20,6 +38,13 @@ const UploadImage: React.FC<IUploadImage> = ({ onUploadImage }) => {
       inputRef.current.click();
     }
   }, [inputRef]);
+
+  const removeImageAction = (fileString: string) => {
+    const auxImages = images.filter((image) => image.path !== fileString);
+
+    setImages(auxImages);
+    onUploadImage(auxImages.map((image) => image.file));
+  };
 
   return (
     <div
@@ -29,12 +54,28 @@ const UploadImage: React.FC<IUploadImage> = ({ onUploadImage }) => {
       onClick={handleClickOnUpload}
       onKeyDown={handleClickOnUpload}
     >
+      {images && images.length ? (
+        <div className="images_container">
+          {images.map((image) => (
+            <div className="image">
+              <img key={image.path} src={image.path} alt={image.path} />
+
+              <button type="button" onClick={() => removeImageAction(image.path)}>
+                x
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <h3 className="upload_title">Clique para anexar novas imagens</h3>
+      )}
+
       <input
         accept="image/gif, image/jpeg"
         ref={inputRef}
         type="file"
+        multiple
         className="input_image_container"
-        value={imagePath}
         onChange={handleImageChange}
       />
     </div>

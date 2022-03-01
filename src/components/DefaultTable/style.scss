@@ -34,13 +34,25 @@
   tbody {
     tr {
       td {
+        max-width: 30px;
         height: 30px;
         border-bottom: 0.01px solid #e5e5e5;
         padding: 10px 0;
-        font-family: 'Montserrat Medium';
-        font-size: $font-minimal;
-        letter-spacing: 0.6px;
         text-align: center;
+
+        span {
+          width: 100%;
+          font-family: 'Montserrat Medium';
+          font-size: $font-minimal;
+          letter-spacing: 0.6px;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          display: -webkit-box;
+        }
       }
 
       svg {
