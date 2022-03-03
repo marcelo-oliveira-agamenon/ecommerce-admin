@@ -51,6 +51,5 @@ export interface CreateOrUpdateProduct {
   Discount: number;
   HasShipping: boolean;
   ShippingPrice: number;
-  Rate: number;
-  ProductImage: Array<File>;
+  ProductImage: Array<File> | undefined;
 }

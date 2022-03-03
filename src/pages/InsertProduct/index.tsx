@@ -6,7 +6,9 @@ import {
   UploadImage,
   DefaultButton,
   DefaultModal,
+  DefaultCheckboxOptions,
 } from '../../components';
+import ProductService from '../../services/products';
 import { CreateOrUpdateProduct } from '../../models/product';
 import CategoryServices from '../../services/category';
 import './style.scss';
@@ -25,7 +27,6 @@ const InsertProduct: React.FC = () => {
     Discount: 0,
     HasShipping: false,
     ShippingPrice: 0,
-    Rate: 0,
     ProductImage: [],
   });
   const [categoriesForSelect, setCategoriesForSelect] = useState<
@@ -35,7 +36,7 @@ const InsertProduct: React.FC = () => {
     }>
   >([]);
 
-  const getAllCategoriesForSelect = useCallback(async () => {
+  const getAllCategoriesForSelect = async () => {
     const categories = (await CategoryServices.getAllCategories()).map((category) => {
       const obj = {
         value: category.ID,
@@ -46,7 +47,7 @@ const InsertProduct: React.FC = () => {
     });
 
     setCategoriesForSelect(categories);
-  }, []);
+  };
 
   useEffect(() => {
     getAllCategoriesForSelect();
@@ -57,9 +58,15 @@ const InsertProduct: React.FC = () => {
     setProduct({ ...product, [propName]: event.target.value });
   };
 
-  const handleSubmitProduct = useCallback((event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  }, []);
+  const handleSubmitProduct = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+
+      const auxProduct = { ...product, ProductImage: undefined };
+      await ProductService.insertNewProduct(auxProduct);
+    },
+    [product],
+  );
 
   return (
     <>
@@ -69,9 +76,7 @@ const InsertProduct: React.FC = () => {
           size="sm"
           overallText="Produto cadastrado com sucesso"
           onConfirmAction={() => setShowModal(false)}
-          // onCancelAction={cancelActionOnModal}
           confirmBtnText="Ok"
-          // cancelBtnText="cancelar"
         />
       )}
 
@@ -115,6 +120,26 @@ const InsertProduct: React.FC = () => {
             />
           </div>
 
+          <div className="grid_element">
+            <DefaultInput
+              name="Discount"
+              type="number"
+              label="Desconto (R$)"
+              value={product.Discount !== 0 ? product.Discount : undefined}
+              onChange={handleInputsChange}
+              required
+            />
+
+            <DefaultCheckboxOptions
+              title="Este produto possui promoção?"
+              options={[
+                { label: 'Sim', checked: product.HasPromotion },
+                { label: 'Não', checked: !product.HasPromotion },
+              ]}
+              onChange={() => setProduct({ ...product, HasPromotion: !product.HasPromotion })}
+            />
+          </div>
+
           <DefaultTextArea
             label="Descrição do Produto"
             name="Description"
@@ -143,6 +168,7 @@ const InsertProduct: React.FC = () => {
           />
 
           <UploadImage
+            placeholder="Clique para anexar novas imagens"
             onUploadImage={(images) => setProduct({ ...product, ProductImage: images })}
           />
 

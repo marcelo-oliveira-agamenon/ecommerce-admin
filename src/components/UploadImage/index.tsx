@@ -2,10 +2,11 @@ import React, { useState, useRef, useCallback } from 'react';
 import './style.scss';
 
 interface IUploadImage {
+  placeholder: string;
   onUploadImage: (images: File[]) => void;
 }
 
-const UploadImage: React.FC<IUploadImage> = ({ onUploadImage }) => {
+const UploadImage: React.FC<IUploadImage> = ({ onUploadImage, placeholder }) => {
   const [images, setImages] = useState<
     Array<{
       file: File;
@@ -57,8 +58,8 @@ const UploadImage: React.FC<IUploadImage> = ({ onUploadImage }) => {
       {images && images.length ? (
         <div className="images_container">
           {images.map((image) => (
-            <div className="image">
-              <img key={image.path} src={image.path} alt={image.path} />
+            <div className="image" key={image.path}>
+              <img src={image.path} alt={image.path} />
 
               <button type="button" onClick={() => removeImageAction(image.path)}>
                 x
@@ -67,7 +68,7 @@ const UploadImage: React.FC<IUploadImage> = ({ onUploadImage }) => {
           ))}
         </div>
       ) : (
-        <h3 className="upload_title">Clique para anexar novas imagens</h3>
+        <h3 className="upload_title">{placeholder}</h3>
       )}
 
       <input

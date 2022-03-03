@@ -10,3 +10,4 @@ export { default as Pagination } from './Pagination';
 export { default as DefaultTextArea } from './DefaultTextArea';
 export { default as DefaultSelect } from './DefaultSelect';
 export { default as UploadImage } from './UploadImage';
+export { default as DefaultCheckboxOptions } from './DefaultCheckboxOptions';

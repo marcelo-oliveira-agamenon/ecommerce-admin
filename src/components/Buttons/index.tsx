@@ -12,7 +12,7 @@ interface IButton
 }
 
 const DefaultButton: React.FC<IButton> = ({ typeButton, loading, ...rest }) => (
-  <button className={`default-button ${typeButton}`} {...rest} type="button">
+  <button className={`default-button ${typeButton}`} type="button" {...rest}>
     {loading ? <div className="loading" /> : rest.children}
   </button>
 );
