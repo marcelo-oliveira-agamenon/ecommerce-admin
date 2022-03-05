@@ -2,8 +2,8 @@ import apiService from '../config/axiosConfig';
 import { ProductImage } from '../models/productImage';
 
 class ProductImageService {
-  async insertProductImage(productId: string): Promise<ProductImage> {
-    const productImage = (await apiService.get(`/v1/product-image/${productId}`)).data;
+  async insertProductImage(productId: string, image: FormData): Promise<ProductImage> {
+    const productImage = (await apiService.post(`/v1/product-image/${productId}`, image)).data;
 
     return productImage;
   }

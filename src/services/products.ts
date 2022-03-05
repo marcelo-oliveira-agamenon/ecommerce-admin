@@ -1,10 +1,5 @@
 import apiService from '../config/axiosConfig';
-import {
-  Product,
-  GetAllProductsFilters,
-  GetAllProductsResponse,
-  CreateOrUpdateProduct,
-} from '../models/product';
+import { Product, GetAllProductsFilters, GetAllProductsResponse } from '../models/product';
 
 class ProductService {
   async getAllProducts(params?: GetAllProductsFilters): Promise<GetAllProductsResponse> {
@@ -17,10 +12,10 @@ class ProductService {
     return allProducts;
   }
 
-  async insertNewProduct(product: CreateOrUpdateProduct): Promise<boolean> {
+  async insertNewProduct(product: FormData): Promise<Product> {
     const createdProduct = (await apiService.post('/v1/product', product)).data;
 
-    return !!createdProduct;
+    return createdProduct;
   }
 
   async editProductById(productId: string, product: Product): Promise<Product> {

@@ -12,6 +12,8 @@
   }
 
   textarea {
+    font-family: 'Montserrat Medium';
+    font-size: $font-small;
     outline: none;
     border: 1.5px solid $primary-color;
     box-shadow: 0px 2px 7px 1px rgba($color: $primary-color, $alpha: 0.33);

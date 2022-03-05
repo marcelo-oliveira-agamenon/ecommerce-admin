@@ -40,16 +40,16 @@ export interface GetAllProductsFilters {
 }
 
 export interface CreateOrUpdateProduct {
-  Name: string;
-  Categoryid: number;
-  Value: number;
-  StockQtd: number;
-  Description: string;
-  TypeUnit: string;
-  TecnicalDetails: string;
-  HasPromotion: boolean;
-  Discount: number;
-  HasShipping: boolean;
-  ShippingPrice: number;
+  name: string;
+  categoryid: string;
+  value: number;
+  stockqtd: number;
+  description: string;
+  type: string;
+  tecnicalDetails: string;
+  hasPromotion: boolean;
+  discount: number | undefined;
+  hasShipping: boolean;
+  shippingPrice: number | undefined;
   ProductImage: Array<File> | undefined;
 }

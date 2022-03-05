@@ -3,6 +3,7 @@ import React from 'react';
 import './style.scss';
 
 interface ICheckboxOptions {
+  type: string;
   title: string;
   options: Array<{
     label: string;
@@ -11,19 +12,29 @@ interface ICheckboxOptions {
   onChange: () => void;
 }
 /* eslint-disable */
-const DefaultCheckboxOptions: React.FC<ICheckboxOptions> = ({ options, title, onChange }) => (
+const DefaultCheckboxOptions: React.FC<ICheckboxOptions> = ({ options, title, type, onChange }) => (
   <div id="checkbox_options">
     <label htmlFor="_">{title}</label>
 
-    {options && options.length
-      ? options.map((option) => (
-          <div key={option.label}>
-            <span>{option.label}</span>
+    <div className="options_container">
+      {options && options.length
+        ? options.map((option) => (
+            <div
+              className={`options_container_option ${option.checked ? 'checked' : ''}`}
+              key={option.label}
+            >
+              <label htmlFor={type + option.label}>{option.label}</label>
 
-            <input type="checkbox" checked={option.checked} onChange={onChange} />
-          </div>
-        ))
-      : null}
+              <input
+                id={type + option.label}
+                type="checkbox"
+                checked={option.checked}
+                onChange={onChange}
+              />
+            </div>
+          ))
+        : null}
+    </div>
   </div>
 );
 
