@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import useLoadingPage from '../../hooks/useLoadingPage';
 import {
   DefaultInput,
   DefaultTextArea,
@@ -17,6 +18,7 @@ import './style.scss';
 
 const InsertProduct: React.FC = () => {
   const history = useHistory();
+  const loading = useLoadingPage();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [product, setProduct] = useState<CreateOrUpdateProduct>({
     name: '',
@@ -64,6 +66,7 @@ const InsertProduct: React.FC = () => {
   const handleSubmitProduct = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      loading.showGlobalLoadingPage();
 
       const auxProduct: CreateOrUpdateProduct = {
         ...product,
@@ -90,11 +93,17 @@ const InsertProduct: React.FC = () => {
           });
         }
 
-        history.push('/products');
+        setShowModal(true);
+        loading.hideGlobalLoadingPage();
       });
     },
     [product],
   );
+
+  const confirmAction = () => {
+    setShowModal(false);
+    history.push('/products');
+  };
 
   return (
     <>
@@ -103,8 +112,8 @@ const InsertProduct: React.FC = () => {
           titleText="Sucesso"
           size="sm"
           overallText="Produto cadastrado com sucesso"
-          onConfirmAction={() => setShowModal(false)}
-          confirmBtnText="Ok"
+          onCancelAction={confirmAction}
+          cancelBtnText="Ok"
         />
       )}
 

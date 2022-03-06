@@ -6,7 +6,10 @@ export default function useLoadingPage() {
     }
 
     const loadingElement = document.createElement('div');
+    const loader = document.createElement('div');
     loadingElement.setAttribute('id', 'global_loading_page');
+    loader.setAttribute('class', 'loader ');
+    loadingElement.appendChild(loader);
     document.getElementById('root')?.appendChild(loadingElement);
   };
 
