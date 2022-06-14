@@ -19,6 +19,7 @@ import './style.scss';
 const InsertProduct: React.FC = () => {
   const history = useHistory();
   const loading = useLoadingPage();
+
   const [showModal, setShowModal] = useState<boolean>(false);
   const [product, setProduct] = useState<CreateOrUpdateProduct>({
     name: '',
@@ -40,6 +41,22 @@ const InsertProduct: React.FC = () => {
       label: string | number;
     }>
   >([]);
+
+  const getErrors = useCallback(() => {
+    const testIt = [
+      product.name,
+      product.categoryid,
+      product.description,
+      product.type,
+      product.tecnicalDetails,
+    ];
+
+    if (testIt.find((data) => !data.length || /\s/g.test(data))) {
+      return true;
+    }
+
+    return false;
+  }, [product]);
 
   const getAllCategoriesForSelect = async () => {
     const categories = (await CategoryServices.getAllCategories()).map((category) => {
@@ -66,6 +83,11 @@ const InsertProduct: React.FC = () => {
   const handleSubmitProduct = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+
+      if (getErrors()) {
+        return;
+      }
+
       loading.showGlobalLoadingPage();
 
       const auxProduct: CreateOrUpdateProduct = {

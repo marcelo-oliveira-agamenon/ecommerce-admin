@@ -1,0 +1,11 @@
+@import './variables';
+
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  thirdColor: $third-color;
+  fourthColor: $fourth-color;
+  errorColor: $error-color;
+  warningColor: $warning-color;
+  successColor: $success-color;
+}
